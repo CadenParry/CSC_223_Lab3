@@ -44,6 +44,21 @@ class LinkedListTest {
 	}
 	
 	@Test
+	void testPrevious()
+	{
+		LinkedList<String> list = new LinkedList<String>();
+		list.addToBack("bad");
+		list.addToBack("me");
+		list.addToBack("good");
+		list.addToBack("me");
+		list.addToBack("me");
+		
+		//System.out.println(list.previous("A").T);
+		
+
+	}
+	
+	@Test
 	void testLast()
 	{
 		LinkedList<String> list = new LinkedList<String>();
@@ -86,6 +101,7 @@ class LinkedListTest {
 	{
 		LinkedList<String> list = new LinkedList<String>();
 		list.addToBack("A");
+		list.addToBack("A");
 		list.addToBack("a");
 		list.addToBack("B");
 		list.addToBack("b");
@@ -97,5 +113,9 @@ class LinkedListTest {
 		list.reverse();
 //		assertEquals("[c, C, b, B, a, A]", list.toString());
 		System.out.println(list.toString());
+		
+		System.out.println(list.last()._data);
+		
+		
 	}
 }
