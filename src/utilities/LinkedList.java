@@ -157,30 +157,5 @@ public class LinkedList<T>
 		}
 
 		return reverse(pointToTail, curr, next, next._next);
-	}
-	
-//	public void reverse()
-//	{
-//		if(isEmpty() || size() == 1) return;
-//		
-//		Node lastValid = _head._next;
-//		
-//		//head points to the returned (new first) node
-//		_head._next = reverse(_head, _head._next, _head._next._next);
-//		
-//		
-//		lastValid._next = _tail;
-//		
-//	}
-//
-//	private Node reverse(Node prev, Node curr, Node next)
-//	{
-//		curr._next = prev;
-//		
-//		if(next == _tail) return curr;
-//
-//		return reverse(curr, next, next._next);
-//	}
-	
-	
+	}	
 }
