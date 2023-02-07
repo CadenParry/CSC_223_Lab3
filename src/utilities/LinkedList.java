@@ -73,6 +73,7 @@ public class LinkedList<T>
 		return contains(target, n._next);
 	}
 
+	//change to private
 	public Node previous(T target)
 	{
 		return previous(target, _head);
@@ -80,7 +81,7 @@ public class LinkedList<T>
 
 	private Node previous(T target, Node n)
 	{
-		if (n._next == _tail || n._next._data.equals(target)) 
+		if (n._next == _tail || n._next._data == target) 
 		{
 			return n != _tail ? n : null;
 		}
@@ -134,31 +135,52 @@ public class LinkedList<T>
 		sb.append("]");
 		return sb.toString();
 	}
-
-	//		public String toString()
-	//		{
-	//			String str = "";
-	//			for(Node current = _head._next; current != _tail; current = current._next)
-	//			{
-	//				str += current._data;
-	//			}
-	//			return str;
-	//		}
-
+	
 	public void reverse()
 	{
-		if(isEmpty()) return;
-
-		Node firstHolder = last();
-		reverse(last(), previous(last()._data));
-		_head._next = firstHolder;
+		if(isEmpty() || size() == 1) return;
+		
+		//points the end of the new LL to _tail
+		reverse(_head._next, _head, _head._next, _head._next._next)._next = _tail;
 	}
 
-	private void reverse(Node last, Node prev)
+	private Node reverse(Node pointToTail, Node prev, Node curr, Node next)
 	{
-		last._next = prev;
-		prev._next = _tail;
-		if (prev == _head._next) return;
-		reverse(last(), previous(prev._data));
+		//reverse operation
+		curr._next = prev;
+		
+		if(next == _tail)
+		{
+			//points the head to the new beginning of the LL
+			_head._next = curr;
+			return pointToTail;
+		}
+
+		return reverse(pointToTail, curr, next, next._next);
 	}
+	
+//	public void reverse()
+//	{
+//		if(isEmpty() || size() == 1) return;
+//		
+//		Node lastValid = _head._next;
+//		
+//		//head points to the returned (new first) node
+//		_head._next = reverse(_head, _head._next, _head._next._next);
+//		
+//		
+//		lastValid._next = _tail;
+//		
+//	}
+//
+//	private Node reverse(Node prev, Node curr, Node next)
+//	{
+//		curr._next = prev;
+//		
+//		if(next == _tail) return curr;
+//
+//		return reverse(curr, next, next._next);
+//	}
+	
+	
 }
