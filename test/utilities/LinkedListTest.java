@@ -53,7 +53,9 @@ class LinkedListTest {
 		list.addToBack("me");
 		list.addToBack("me");
 		
-		//System.out.println(list.previous("A").T);
+		System.out.println(list.previous(list._head._next._next._data)._data);
+		System.out.println(list.previous(list._head._next._next._next._next._data)._data);
+
 		
 
 	}
@@ -85,7 +87,6 @@ class LinkedListTest {
 	void testAddToBack()
 	{
 		LinkedList<String> list = new LinkedList<String>();
-		
 		list.addToBack("A");
 		list.addToBack("a");
 		list.addToBack("A");

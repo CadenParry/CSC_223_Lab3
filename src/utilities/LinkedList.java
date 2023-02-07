@@ -83,19 +83,21 @@ public class LinkedList<T>
 	{
 		if (n._next == _tail || n._next._data == target) 
 		{
-			return n != _tail ? n : null;
+			return n._next != _tail ? n : null;
 		}
 		return previous(target, n._next);
 	}
 
 	public boolean remove(T target)
 	{
-		if(isEmpty())return false;
-
 		Node n = previous(target);
-		n._next = n._next._next;
-		_size -= 1;
-		return true;
+		if(n != null)
+		{
+			n._next = n._next._next;
+			_size -= 1;
+			return true;
+		}
+		return false;
 	}
 
 	public Node last()
@@ -135,27 +137,21 @@ public class LinkedList<T>
 		sb.append("]");
 		return sb.toString();
 	}
-	
-	public void reverse()
+
+	public void reverse() 
 	{
-		if(isEmpty() || size() == 1) return;
-		
-		//points the end of the new LL to _tail
-		reverse(_head._next, _head, _head._next, _head._next._next)._next = _tail;
+		reverse(_head._next, _tail);
 	}
 
-	private Node reverse(Node pointToTail, Node prev, Node curr, Node next)
+	private void reverse(Node current, Node prev) 
 	{
-		//reverse operation
-		curr._next = prev;
-		
-		if(next == _tail)
+		if (current == _tail) 
 		{
-			//points the head to the new beginning of the LL
-			_head._next = curr;
-			return pointToTail;
+			_head._next = prev;
+			return;
 		}
-
-		return reverse(pointToTail, curr, next, next._next);
-	}	
+		Node nextNode = current._next;
+		current._next = prev;
+		reverse(nextNode, current);
+	}
 }
