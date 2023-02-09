@@ -85,7 +85,7 @@ public class LinkedList<T>
 	}
 
 	/**
-	 * Adds a new node to the front of the list
+	 * Adds a new node to the front of the list, does not allow null data
 	 * 
 	 * @param element - data of the new node
 	 */
@@ -168,7 +168,7 @@ public class LinkedList<T>
 	}
 	
 	/**
-	 * Adds a new node to the back of the list
+	 * Adds a new node to the back of the list, does not allow null data
 	 * 
 	 * @param element - data of the new element
 	 */
