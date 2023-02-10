@@ -1,6 +1,7 @@
 package utilities;
 import java.util.Comparator;
 
+<<<<<<< Updated upstream
 public class LinkedEquivalenceClass <T> {
 
     private T canonical;
@@ -117,5 +118,50 @@ public class LinkedEquivalenceClass <T> {
     	return canonical + " | " + rest.toString();
     }
 	       
+=======
+import java.util.ArrayList;
+import java.util.Comparator;
+>>>>>>> Stashed changes
 
+public class LinkedEquivalenceClass<T> {
+	protected T _canonical;
+	protected Comparator<T> _comparator;
+	protected  LinkedList<T> _rest;
+	
+	public LinkedEquivalenceClass(Comparator<T> element){
+		_comparator = element;
+	}
+	public T canonical() {return _canonical;}
+	public boolean isEmpty() {return _rest.isEmpty();}
+	public void clear() {_rest.clear();}
+	public void clearNonCanonical() {
+		
+		}
+	public int size() {return _rest._size;}
+	
+	public boolean add(T element) {
+		if(_comparator.compare(_canonical, element)==0) {
+			if(!(_rest.contains(element))) {
+				_rest.addToBack(element);
+				return true;
+			}
+		}
+		return false;
+		}
+	public boolean contains(T target) {
+		return false;}
+	public boolean belongs(T target) {
+		if(_comparator.compare(_canonical, target)==0)
+			return true;
+		return false;}
+	public boolean remove(T target) {
+		return false;}
+	public boolean removeCanonical() {
+		return false;}
+	public boolean demoteAndSetCanonical(T element) {
+		return false;}
+	public String toString() {
+		return null;}
+	
+	
 }
