@@ -4,118 +4,206 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class LinkedListTest {
-
+class LinkedListTest 
+{
 	@Test
-	void testContainsPreviousRemove() 
+	void testConstruction()
 	{
 		LinkedList<String> list = new LinkedList<String>();
-
 		assertEquals(0, list._size);
 		assertTrue(list.isEmpty());
-		
-		list.addToFront("z");
-		list.addToFront("y");
-		list.addToFront("b");
-		list.addToFront("A");
-		list.addToFront("a");
-		list.addToFront("A");
-		
-		assertEquals(6, list._size);
-		assertFalse(list.isEmpty());
-
-		assertEquals("[A, a, A, b, y, z]", list.toString());
-		
-		assertFalse(list.contains(null));
-		assertTrue(list.contains("z"));
-		assertTrue(list.contains("a"));
-		assertTrue(list.contains("A"));
-		assertFalse(list.contains("cA"));
-		assertFalse(list.contains("Ac"));
-		
-		assertEquals("y", list.previous("z")._data);
-		assertEquals(list._head, list.previous("A"));
-		assertEquals("b", list.previous("y")._data);
-
-		assertTrue(list.remove("z"));
-		assertEquals("[A, a, A, b, y]", list.toString());
-		assertTrue(list.remove("A"));
-		assertEquals("[a, A, b, y]", list.toString());
+		assertTrue(list._head._next == list._tail);
 	}
-	
-	@Test
-	void testPrevious()
+
+	@Test 
+	void testAddToFront()
 	{
 		LinkedList<String> list = new LinkedList<String>();
-		list.addToBack("bad");
-		list.addToBack("me");
-		list.addToBack("good");
-		list.addToBack("me");
-		list.addToBack("me");
-		
-		//System.out.println(list.previous("A").T);
-		
+		assertEquals(0, list._size); assertTrue(list.isEmpty());
 
+		list.addToFront(null);
+		list.addToFront("good");
+		list.addToFront("is");
+		list.addToFront("fundip");
+
+		assertEquals("[fundip, is, good]", list.toString());
+		assertEquals(3, list._size); assertFalse(list.isEmpty());
 	}
-	
-	@Test
-	void testLast()
-	{
-		LinkedList<String> list = new LinkedList<String>();
-		assertEquals(list._head, list.last());
 
-		list.addToFront("z");
-		
-		assertEquals("z", list.last()._data);
-
-		list.addToFront("y");
-		
-		assertEquals("z", list.last()._data);
-
-		list.addToFront("b");
-		list.addToFront("A");
-		list.addToFront("a");
-		list.addToFront("A");
-		assertEquals("[A, a, A, b, y, z]", list.toString());
-		
-		assertEquals("z", list.last()._data.toString());
-	}
-	
 	@Test
 	void testAddToBack()
 	{
 		LinkedList<String> list = new LinkedList<String>();
-		
-		list.addToBack("A");
+		assertEquals(0, list._size); assertTrue(list.isEmpty());
+
+		list.addToBack(null);
+		list.addToBack("fundip");
+		list.addToBack("is");
+		list.addToBack("good");
+
+		assertEquals("[fundip, is, good]", list.toString());
+		assertEquals(3, list._size); assertFalse(list.isEmpty());
+	}
+
+	@Test 
+	void testAddDeleteAdd()
+	{
+		LinkedList<String> list = new LinkedList<String>();
+		assertEquals(0, list._size); assertTrue(list.isEmpty());
+
+
+		//add 
+		list.addToBack("good");
+		list.addToFront("is");
+		list.addToFront("fundip");
+		list.addToBack("!!!");
+
+		//check
+		assertEquals(4, list._size);
+		assertEquals("[fundip, is, good, !!!]", list.toString());
+
+		//clear and check for reset
+		list.clear();
+		assertEquals(0, list._size);
+		assertTrue(list.isEmpty());
+		assertEquals("[]", list.toString());
+
+		//second add
 		list.addToBack("a");
-		list.addToBack("A");
-		list.addToBack("b");
-		list.addToBack("y");
-		list.addToBack("z");
+		list.addToFront("is");
+		list.addToFront("this");
+		list.addToBack("new");
+		list.addToBack("entry");
+
+		//check
+		assertEquals(5, list._size);
+		assertEquals("[this, is, a, new, entry]", list.toString());
+	}
+
+	@Test
+	void testContains()
+	{
+		LinkedList<String> list = new LinkedList<String>();
 		
-		assertEquals("[A, a, A, b, y, z]", list.toString());
+		list.addToBack("A");
+		list.addToBack("B");
+		list.addToBack("C");
+		list.addToBack("D");
+		list.addToBack("E");
+		list.addToBack("F");
+
+		//not in list
+		assertFalse(list.contains(null));
+		assertFalse(list.contains("fundip"));
+		assertFalse(list.contains("AB"));
+
+		//in list
+		assertTrue(list.contains("A"));
+		assertTrue(list.contains("D"));
+		assertTrue(list.contains("F"));
+	}
+
+	@Test
+	void testRemove()
+	{
+		LinkedList<String> list = new LinkedList<String>();
+		
+		//remove from empty list
+		assertFalse(list.remove("fundip"));
+
+		list.addToBack("A");
+		list.addToBack("B");
+		list.addToBack("C");
+		list.addToBack("D");
+		list.addToBack("E");
+		list.addToBack("F");
+		
+		//not in list
+		assertFalse(list.remove(null));
+		assertFalse(list.remove("AB"));
+		assertFalse(list.remove("a"));
+		
+		//first
+		assertTrue(list.remove("A")); assertEquals(5, list.size());
+		
+		//last
+		assertTrue(list.remove("F")); assertEquals(4, list.size());
+		
+		//middle
+		assertTrue(list.remove("C")); assertEquals(3, list.size());
+		
+		//try to remove something that is already removed
+		assertFalse(list.remove("A"));
+		
+		list.addToBack("Z");
+		assertEquals("[B, D, E, Z]", list.toString());
 	}
 	
 	@Test
-	void testReverse()
+	void testReverseSingleList()
+	{
+		LinkedList<String> list = new LinkedList<String>();
+		list.addToBack("A");
+	
+		assertEquals("[A]", list.toString());
+		list.reverse();
+		assertEquals("[A]", list.toString());
+		list.reverse();
+		assertEquals("[A]", list.toString());
+	}
+	
+	@Test
+	void testReverseDoubleList()
+	{
+		LinkedList<String> list = new LinkedList<String>();
+		list.addToBack("A");
+		list.addToBack("B");
+	
+		assertEquals("[A, B]", list.toString());
+		list.reverse();
+		assertEquals("[B, A]", list.toString());
+		list.reverse();
+		assertEquals("[A, B]", list.toString());
+	}
+	
+	@Test
+	void testReverseDuplicates()
 	{
 		LinkedList<String> list = new LinkedList<String>();
 		list.addToBack("A");
 		list.addToBack("A");
 		list.addToBack("a");
 		list.addToBack("B");
-		list.addToBack("b");
+		list.addToBack("bb");
 		list.addToBack("C");
 		list.addToBack("c");
-		
-		System.out.println(list.toString());
-//		assertEquals("[A, a, B, b, C, c]", list.toString());
+
+		assertEquals("[A, A, a, B, bb, C, c]", list.toString());
 		list.reverse();
-//		assertEquals("[c, C, b, B, a, A]", list.toString());
-		System.out.println(list.toString());
-		
-		System.out.println(list.last()._data);
-		
-		
+		assertEquals("[c, C, bb, B, a, A, A]", list.toString());
+		list.reverse();
+		assertEquals("[A, A, a, B, bb, C, c]", list.toString());
 	}
+	
+	@Test
+	void testReverseLongIntList()
+	{
+		LinkedList<Integer> forward = new LinkedList<Integer>();
+		LinkedList<Integer> backward = new LinkedList<Integer>();
+
+		
+		for(int x = -1000; x <= 1000; x++)
+		{
+			//creates a list with increasing order
+			forward.addToBack(x);
+			
+			//creates a list of opposite order
+			backward.addToFront(x);
+		}
+		
+		forward.reverse();
+		assertEquals(backward.toString(), forward.toString());
+	}
+	
+	
 }
