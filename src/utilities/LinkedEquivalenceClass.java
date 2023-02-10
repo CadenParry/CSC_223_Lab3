@@ -1,11 +1,6 @@
 package utilities;
 import java.util.Comparator;
 
-<<<<<<< Updated upstream
-
-import java.util.Comparator;
-
-<<<<<<< HEAD
     private T canonical;
     private Comparator<T> comparator;
     private LinkedList<T> rest;
@@ -119,124 +114,6 @@ import java.util.Comparator;
     public String toString() {
     	return canonical + " | " + rest.toString();
     }
-=======
-import java.util.ArrayList;
-import java.util.Comparator;
-
-public class LinkedEquivalenceClass<T> {
-	protected T _canonical;
-	protected Comparator<T> _comparator;
-	protected  LinkedList<T> _rest;
-	
-	public LinkedEquivalenceClass(Comparator<T> element){
-		_comparator = element;
-	}
-	public T canonical() {return _canonical;}
-	public boolean isEmpty() {return _rest.isEmpty();}
-	public void clear() {_rest.clear();}
-	public void clearNonCanonical() {
-		
-		}
-	public int size() {return _rest._size;}
-	
-	public boolean add(T element) {
-		if(_comparator.compare(_canonical, element)==0) {
-			if(!(_rest.contains(element))) {
-				_rest.addToBack(element);
-				return true;
-			}
-		}
-		return false;
-		}
-	public boolean contains(T target) {
-		return false;}
-	public boolean belongs(T target) {
-		if(_comparator.compare(_canonical, target)==0)
-			return true;
-		return false;}
-	public boolean remove(T target) {
-		return false;}
-	public boolean removeCanonical() {
-		return false;}
-	public boolean demoteAndSetCanonical(T element) {
-		return false;}
-	public String toString() {
-		return null;}
-	
-	
->>>>>>> Stashed changes
-=======
-public class LinkedEquivalenceClass <T> 
-{
-	protected T _canonical;
-	protected Comparator<T> _comparator;
-	protected LinkedList<T> _rest;
-
-	public LinkedEquivalenceClass(Comparator<T> comparator)
-	{
-		
-	}
-	
-	public T canonical()
-	{
-		return null;
-	}
-	
-	public boolean isEmpty()
-	{
-		return false;
-	}
-	
-	public void clear()
-	{
-		return;
-	}
-	
-	public void clearNonCanonical()
-	{
-		return;
-	}
-	
-	public int size()
-	{
-		return -1;
-	}
-	
-	public boolean add(T element)
-	{
-		return false;
-	}
-	
-	public boolean contains(T target)
-	{
-		return false;
-	}
-	
-	public boolean belongs(T target)
-	{
-		return false;
-	}
-	
-	public boolean remove(T target)
-	{
-		return false;
-	}
-	
-	public boolean removeCanonical()
-	{
-		return false;
-	}
-	
-	public boolean demoteAndSetCanonical(T element)
-	{
-		return false;
-	}
-	
-	public String toString()
-	{
-		return null;
-	}	
->>>>>>> 4e6ec264c3f5fcba1c058663907c1d0539fd5095
 }
 
 
