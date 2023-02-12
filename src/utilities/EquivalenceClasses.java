@@ -25,6 +25,7 @@ public class EquivalenceClasses <T> {
 	
 	public boolean contains (T target)
 	{
+		if (target == null) return false;
 		for (LinkedEquivalenceClass<T> list : _classes)
 		{
 			if (list.contains(target)) return true;
